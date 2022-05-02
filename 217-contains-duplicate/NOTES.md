@@ -1,9 +1,8 @@
-3 approaches:
-- Brute force （2 pointers） 
+1. Brute force （2 pointers） 
 O(N^2)
 
-- Sort and compare
+2. Sort and compare
 O(N log N)
 
-- Dictionary 
+3. Dictionary 
 O(N)
