@@ -37,18 +37,19 @@
 
 class Solution:
     def productExceptSelf(self, nums):
+        # nums = [1,2,3,4]
         n = len(nums)
         res = [None] * n
         
         # Compute intermediate result
-        res[0] = 1
-        for i in range(1, n):
-            res[i] = res[i-1] * nums[i-1]
+        p = 1
+        for i in range(n):
+            res[i] = p
+            p *= nums[i]
         
-        # res = [1,1,2,6]
-        postproduct = 1
+        p = 1
         for i in range(n-1,-1,-1):
-            res[i] *= postproduct
-            postproduct *= nums[i]
+            res[i] *= p
+            p *= nums[i]
         
         return res
