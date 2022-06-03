@@ -1,3 +1,8 @@
+# Methodology -> Time, Space Complexity
+# 1. Save to list, remove() -> O(N), O(N)
+# 2. Count length of list, traverse to node and delete -> O(N), O(1)
+# 3. Slow, fast pointers -> O(N), O(1)
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
