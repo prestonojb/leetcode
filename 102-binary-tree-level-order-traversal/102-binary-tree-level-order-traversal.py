@@ -26,4 +26,3 @@ class Solution:
             res.append(level) 
             
         return res
-            
