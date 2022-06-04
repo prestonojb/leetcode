@@ -1,13 +1,10 @@
-# 1. Dictionary - O(n), O(n)
+# 1. Bucket/Dictionary - O(n), O(n)
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         d = dict()
         for i, num in enumerate(nums):
-            if d.get(num) is None:
-                d[num] = 1
-            else:
-                d[num] += 1
+            d[num] = 1 + d.get(num, 0)
         
         bucket = [[] for _ in range(len(nums) + 1)]
         for num, freq in d.items():
@@ -15,7 +12,7 @@ class Solution:
         
         res = []
         for i in range(len(bucket) - 1, -1, -1):
-            for j in range(len(bucket[i])):
-                res.append(bucket[i][j])
+            for num in bucket[i]:
+                res.append(num)
                 if len(res) == k:
                     return res
