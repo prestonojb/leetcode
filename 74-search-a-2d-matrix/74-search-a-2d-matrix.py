@@ -7,6 +7,13 @@ class Solution:
             row = (top + bot) // 2
 
             l, r = 0, len(matrix[0]) - 1
+            
+            if matrix[row][l] > target:
+                bot = row - 1
+                continue
+            elif matrix[row][r] < target:
+                top = row + 1
+                continue
 
             while l <= r:
                 m = (l+r) // 2
