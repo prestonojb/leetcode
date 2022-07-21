@@ -1,11 +1,12 @@
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         res = []
+        nums.sort()
         
         def dfs(i, cur):
             if i == len(nums):
-                if sorted(cur) not in res:
-                    res.append(sorted(cur[:]))
+                if cur not in res:
+                    res.append(cur[:])
                 return 
 
             cur.append(nums[i])
