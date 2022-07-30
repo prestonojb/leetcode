@@ -3,33 +3,34 @@ class Solution:
         """
         Do not return anything, modify board in-place instead.
         """
-        ROWS, COLS = len(board), len(board[0])
+        stack = []
+        marked = set()
         
-        def capture(r, c):
-            if (r < 0 or c < 0 or r == ROWS or c == COLS 
-                or board[r][c] != "O"):
-                return
-            board[r][c] = "T"
-            capture(r + 1, c)
-            capture(r - 1, c)
-            capture(r, c + 1)
-            capture(r, c - 1)
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                if r in [0, len(board) - 1] or c in [0, len(board[0]) - 1]:
+                    if board[r][c] == "O":
+                        marked.add((r,c))
+                        stack.append((r,c))
         
-        # 1. (DFS) Capture unsurrounded regions (O -> T)
-        for r in range(ROWS):
-            for c in range(COLS):
-                if (board[r][c] == "O" and
-                    (r in [0, ROWS - 1] or c in [0, COLS - 1])):
-                    capture(r, c)
-        
-        # 2. Capture surrounded regions (O -> X)
-        for r in range(ROWS):
-            for c in range(COLS):
+        for r in [0, len(board) - 1]:
+            for c in [0, len(board[0]) - 1]:
                 if board[r][c] == "O":
+                    marked.add((r,c))
+                    stack.append((r,c))
+        
+        directions = [(1,0),(-1,0),(0,1),(0,-1)]
+        while stack:
+            r, c = stack.pop()
+            for dr, dc in directions:
+                row, col = r + dr, c + dc
+                if row >= 0 and row < len(board) and col >= 0 and col < len(board[0]):
+                    if board[row][col] == "O" and (row, col) not in marked:
+                        marked.add((row, col))
+                        stack.append((row, col))
+                        
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                if board[r][c] == "O" and (r, c) not in marked:
                     board[r][c] = "X"
-                    
-        # 3. Uncapture unsurrounded regions (T -> O)
-        for r in range(ROWS):
-            for c in range(COLS):
-                if board[r][c] == "T":
-                    board[r][c] = "O"
+                        
