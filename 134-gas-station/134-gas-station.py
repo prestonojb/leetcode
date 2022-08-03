@@ -14,7 +14,3 @@ class Solution:
                 start_idx = i+1
         
         return start_idx
-            
-    
-            
-    
