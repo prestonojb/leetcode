@@ -10,39 +10,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        self.updateDepth(root, 1)
-        
-        stack = []
-        
         if root is None:
             return 0
         
-        stack = [root]
-        res = 0
-        
-        while len(stack) > 0:
-            curr = stack.pop()
-            
-            if curr.depth > res:
-                res = curr.depth
-            
-            if curr.left:
-                stack += [curr.left]
-                
-            if curr.right:
-                stack += [curr.right]
-        
-        return res
-                            
-    def updateDepth(self, tree_node, depth):
-        if tree_node is None:
-            return
-        
-        tree_node.depth = depth
-        
-        if tree_node.left:
-            self.updateDepth(tree_node.left, depth + 1)
-        if tree_node.right:
-            self.updateDepth(tree_node.right, depth + 1)
-        
-        
+        return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
