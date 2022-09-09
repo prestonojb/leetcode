@@ -1,3 +1,5 @@
+# 1. Recursion
+# 2. Inorder Traversal
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -6,13 +8,17 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        def valid(node, left, right):
-            if not node:
-                return True
-            if not (node.val < right and node.val > left):
-                return False
-            
-            return (valid(node.left, left, node.val) and
-                    valid(node.right, node.val, right))
+        arr = []
+        stack = []
+        curr = root
         
-        return valid(root, float("-inf"), float("inf"))
+        while stack or curr:
+            if curr:
+                stack.append(curr)
+                curr = curr.left
+            else:
+                curr = stack.pop()
+                arr.append(curr.val)
+                curr = curr.right
+        
+        return arr == sorted(arr) and len(arr) == len(set(arr))
