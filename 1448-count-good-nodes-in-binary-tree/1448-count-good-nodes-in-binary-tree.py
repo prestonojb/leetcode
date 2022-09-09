@@ -17,18 +17,21 @@ class Solution:
         
         # dfs (*)
         # bfs
-        
         res = [0]
         
-        def dfs(root, immediate_good_parent_node_val):
-            if root.val >= immediate_good_parent_node_val:
+        def dfs(root, limit):
+            if root is None:
+                return
+            if root.val >= limit:
                 res[0] += 1
-                immediate_good_parent_node_val = root.val
+                limit = root.val
             
-            if root.left:
-                dfs(root.left, immediate_good_parent_node_val)
-            if root.right:
-                dfs(root.right, immediate_good_parent_node_val)
-            
+            dfs(root.left, limit)
+            dfs(root.right, limit)
+        
         dfs(root, root.val)
         return res[0]
+            
+            
+            
+            
