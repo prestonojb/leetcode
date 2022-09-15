@@ -10,12 +10,8 @@ class Solution:
             if i >= len(candidates) or total > target:
                 return
             
-            cur.append(candidates[i])
-            dfs(i, cur, total + candidates[i])
-            
-            cur.pop()
+            dfs(i, cur + [candidates[i]], total + candidates[i])
             dfs(i+1, cur, total)
         
         dfs(0, [], 0)
         return res
-            
