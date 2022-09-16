@@ -23,17 +23,16 @@ class Solution:
 # 2. Inorder traversal (Iterative)
         stack = []
         curr = root
-        n = 0
-
+    
         while curr or stack:
-            while curr:
+            if curr:
                 stack.append(curr)
                 curr = curr.left
-            curr = stack.pop()
-
-            n += 1
-            if n == k:
-                return curr.val
-
-            curr = curr.right
-        
+            else:
+                curr = stack.pop()
+                
+                k -= 1
+                if k == 0:
+                    return curr.val
+                
+                curr = curr.right
